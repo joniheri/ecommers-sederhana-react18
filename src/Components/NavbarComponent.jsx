@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-export default function Navbar() {
+export default function NavbarComponent() {
   return (
     <>
       <nav

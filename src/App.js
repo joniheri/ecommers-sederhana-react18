@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Navbar from "./Components/Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+
+import NavbarComponent from "./Components/NavbarComponent";
 import About from "./Pages/About";
 import Home from "./Pages/Home";
 import Product from "./Pages/Product/Product";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <NavbarComponent />
 
         {/* Content */}
         <Routes>
