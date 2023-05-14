@@ -1,10 +1,16 @@
-let dataArray = [
+export let dataArray = [
   {
-    id: 123,
-    productName: "ladsjf",
+    id: 1001,
+    productName: "Sepatu",
+    imgUrl: "",
+    price: 130000,
   },
   {
-    id: 124,
-    productName: "ladsjf",
+    id: 1002,
+    productName: "Baju Kaos",
+    imgUrl: "",
+    price: 300000,
   },
 ];
+
+export let dataKedua = [];
