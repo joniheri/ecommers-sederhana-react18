@@ -11,7 +11,7 @@ export default function Home() {
       setNamaSaya("Jon Heri");
     } else if (namaSaya == "Jon Heri") {
       setNamaSaya("Wildan");
-    } else if (namaSaya == "Jon Heri") {
+    } else if (namaSaya == "Wildan") {
       setNamaSaya("");
     } else {
       setNamaSaya("");
