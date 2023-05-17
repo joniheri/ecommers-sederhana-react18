@@ -79,6 +79,15 @@ export default function NavbarComponent() {
                   Login
                 </a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link" aria-current="page" href="#">
+                  <img
+                    src={require("../Image/icons/icons8-cart-48.png")}
+                    alt=""
+                    style={{ width: "25px", height: "25px" }}
+                  />
+                </a>
+              </li>
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"

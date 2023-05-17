@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { dataProduct } from "./Product/DataProduct";
 
 export default function Home() {
   const [namaSaya, setNamaSaya] = useState("");
@@ -17,6 +18,8 @@ export default function Home() {
       setNamaSaya("");
     }
   };
+
+  console.log("Data Product: ", dataProduct);
 
   return (
     <div className="container">
@@ -99,17 +102,17 @@ export default function Home() {
         </button>
       </div>
 
-      <h1>{namaSaya}</h1>
-      <h2>{increemandDecreeman}</h2>
+      {/* <h1>{namaSaya}</h1>
+      <h2>{increemandDecreeman}</h2> */}
 
-      <button
+      {/* <button
         className="btn btn-success btn-sm mt-3 mb-3 me-3"
         onClick={handleGantiNamaSaya}
       >
         Rubah Nama
-      </button>
+      </button> */}
 
-      <button
+      {/* <button
         onClick={() => {
           setIncreemandDecreeman(increemandDecreeman + 1);
         }}
@@ -125,68 +128,49 @@ export default function Home() {
         className="btn btn-danger btn-sm"
       >
         -
-      </button>
+      </button> */}
 
-      <p style={{ textAlign: "justify" }}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum commodi
-        earum quidem, soluta blanditiis sint labore ipsa voluptatibus sequi
-        libero velit hic corrupti debitis id, magnam nemo iure, vero nisi. Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Dolores ipsum
-        explicabo adipisci commodi obcaecati, consequatur quis quo totam ea
-        iusto accusamus rerum alias unde vero id ratione officia, veniam minus.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga soluta
-        enim eius natus similique, odio saepe nisi id, autem, nostrum veniam
-        itaque sunt! A consequatur, accusantium voluptas ratione aspernatur
-        dignissimos.
-      </p>
-      <p style={{ textAlign: "justify" }}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum commodi
-        earum quidem, soluta blanditiis sint labore ipsa voluptatibus sequi
-        libero velit hic corrupti debitis id, magnam nemo iure, vero nisi. Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Dolores ipsum
-        explicabo adipisci commodi obcaecati, consequatur quis quo totam ea
-        iusto accusamus rerum alias unde vero id ratione officia, veniam minus.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga soluta
-        enim eius natus similique, odio saepe nisi id, autem, nostrum veniam
-        itaque sunt! A consequatur, accusantium voluptas ratione aspernatur
-        dignissimos.
-      </p>
-      <p style={{ textAlign: "justify" }}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum commodi
-        earum quidem, soluta blanditiis sint labore ipsa voluptatibus sequi
-        libero velit hic corrupti debitis id, magnam nemo iure, vero nisi. Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Dolores ipsum
-        explicabo adipisci commodi obcaecati, consequatur quis quo totam ea
-        iusto accusamus rerum alias unde vero id ratione officia, veniam minus.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga soluta
-        enim eius natus similique, odio saepe nisi id, autem, nostrum veniam
-        itaque sunt! A consequatur, accusantium voluptas ratione aspernatur
-        dignissimos.
-      </p>
-      <p style={{ textAlign: "justify" }}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum commodi
-        earum quidem, soluta blanditiis sint labore ipsa voluptatibus sequi
-        libero velit hic corrupti debitis id, magnam nemo iure, vero nisi. Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Dolores ipsum
-        explicabo adipisci commodi obcaecati, consequatur quis quo totam ea
-        iusto accusamus rerum alias unde vero id ratione officia, veniam minus.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga soluta
-        enim eius natus similique, odio saepe nisi id, autem, nostrum veniam
-        itaque sunt! A consequatur, accusantium voluptas ratione aspernatur
-        dignissimos.
-      </p>
-      <p style={{ textAlign: "justify" }}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum commodi
-        earum quidem, soluta blanditiis sint labore ipsa voluptatibus sequi
-        libero velit hic corrupti debitis id, magnam nemo iure, vero nisi. Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Dolores ipsum
-        explicabo adipisci commodi obcaecati, consequatur quis quo totam ea
-        iusto accusamus rerum alias unde vero id ratione officia, veniam minus.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga soluta
-        enim eius natus similique, odio saepe nisi id, autem, nostrum veniam
-        itaque sunt! A consequatur, accusantium voluptas ratione aspernatur
-        dignissimos.
-      </p>
+      {/* Data Product */}
+      <div className="mb-5">
+        <h1 className="mt-4" style={{ color: "#BF3919" }}>
+          Let's Order
+        </h1>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+          {dataProduct.map((item, index) => {
+            return (
+              <div class="col">
+                <div class="card h-100 shadow">
+                  <img
+                    src={item.img}
+                    class="card-img-top"
+                    alt="..."
+                    style={{
+                      height: "300px",
+                      width: "auto",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">{item.productName}</h5>
+                    <p class="card-text">IDR {item.price}</p>
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <button className="btn btn-secondary w-100">
+                          Detail
+                        </button>
+                      </div>
+                      <div className="col-lg-6">
+                        <button className="btn btn-danger w-100">Order</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* End Data Product */}
     </div>
   );
 }
