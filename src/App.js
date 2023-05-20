@@ -1,4 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  GlobalContext,
+  GlobalContextProvider,
+} from "./Contexts/GlobateContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -9,6 +13,7 @@ import Home from "./Pages/Home";
 import Product from "./Pages/Product/Product";
 
 import PrivateRoute from "./Components/PrivateRoute";
+import Login from "./Pages/Login";
 
 function App() {
   const namaSaya = "Jon Heri";
@@ -16,20 +21,23 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <NavbarComponent />
+        <GlobalContextProvider>
+          <NavbarComponent />
 
-        {/* Content */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/about"
-            element={<About nilaiNama={namaSaya} dataBuah={dataBuah} />}
-          />
-          <Route element={<PrivateRoute />}>
-            <Route path="/product" element={<Product />} />
-          </Route>
-        </Routes>
-        {/* End Content */}
+          {/* Content */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/about"
+              element={<About nilaiNama={namaSaya} dataBuah={dataBuah} />}
+            />
+            <Route path="/login" element={<Login />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/product" element={<Product />} />
+            </Route>
+          </Routes>
+          {/* End Content */}
+        </GlobalContextProvider>
       </BrowserRouter>
     </>
   );
