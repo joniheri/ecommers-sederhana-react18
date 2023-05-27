@@ -7,7 +7,7 @@ export default function Product() {
   return (
     <div className="container">
       <h1>Data Product</h1>
-      <table class="table table-striped table-sm">
+      <table className="table table-striped table-sm">
         <thead>
           <tr style={{ backgroundColor: "black", color: "white" }}>
             <th scope="col">No</th>

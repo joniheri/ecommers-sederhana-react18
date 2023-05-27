@@ -12,6 +12,9 @@ export default function Home() {
   const [input1, steInput1] = useState("");
   const [input2, steInput2] = useState("");
   const [increemandDecreeman, setIncreemandDecreeman] = useState(1);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchResultsDataProduct, setSearchResultsDataProduct] =
+    useState(dataProduct);
 
   const handleGantiNamaSaya = () => {
     if (namaSaya == "Nama Saya") {
@@ -25,18 +28,20 @@ export default function Home() {
     }
   };
 
-  const handleOrder = () => {
+  const handleOrder = (id) => {
     if (globalState.isLogin) {
-      console.log("Bisa Order");
+      const dataById = searchResultsDataProduct.find((item) => item.id === id);
+      console.log("dataProductById: ", dataById);
+      globalDispatch({
+        type: "ADD_PRODUCT_TO_CART",
+        data: dataById,
+      });
     } else {
       navigate("/login");
     }
   };
 
   // Search Data Product
-  const [searchInput, setSearchInput] = useState("");
-  const [searchResultsDataProduct, setSearchResultsDataProduct] =
-    useState(dataProduct);
   const handleOnChangeSearching = (e) => {
     setSearchInput(e.target.value);
     searchInData(e.target.value);
@@ -217,17 +222,20 @@ export default function Home() {
                       alt="..."
                     />
                     <div className="card-body">
+                      <h5 className="card-title">ID : {item.id}</h5>
                       <h5 className="card-title">{item.productName}</h5>
                       <p className="card-text">{formatRupiah(item.price)}</p>
                       <div className="row">
-                        <div className="col-lg-6">
+                        <div className="col-lg-6 mb-2">
                           <button className="btn btn-secondary w-100">
                             Detail
                           </button>
                         </div>
-                        <div className="col-lg-6">
+                        <div className="col-lg-6 mb-2">
                           <button
-                            onClick={handleOrder}
+                            onClick={() => {
+                              handleOrder(item.id);
+                            }}
                             className="btn btn-danger w-100"
                           >
                             Order
@@ -242,6 +250,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <pre>{JSON.stringify(globalState.dataCarts, null, 2)}</pre>
       {/* End Data Product */}
     </div>
   );

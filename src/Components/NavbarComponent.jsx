@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { GlobalContext } from "../Contexts/GlobateContext";
 
 export default function NavbarComponent() {
   const [globalState, globalDispatch] = useContext(GlobalContext);
-  // console.log(globalState);
+  const location = useLocation();
+  // console.log("Global state di Navbarjsx: ", globalState);
 
   return (
     <>
@@ -30,12 +31,23 @@ export default function NavbarComponent() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link to="/" className="nav-link active" aria-current="page">
+                <Link
+                  to="/"
+                  className={`nav-link ${
+                    location.pathname === "/" ? "active" : ""
+                  }`}
+                  aria-current="page"
+                >
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/about" className="nav-link">
+                <Link
+                  to="/about"
+                  className={`nav-link ${
+                    location.pathname === "/about" ? "active" : ""
+                  } `}
+                >
                   About
                 </Link>
               </li>
@@ -80,13 +92,56 @@ export default function NavbarComponent() {
               {globalState.isLogin ? (
                 <>
                   <li className="nav-item">
-                    <a className="nav-link" aria-current="page" href="#">
-                      <img
-                        src={require("../Image/icons/icons8-cart-48-white.png")}
-                        alt=""
-                        style={{ width: "25px", height: "25px" }}
-                      />
-                    </a>
+                    <Link to="/carts" className="nav-link" aria-current="page">
+                      <div
+                        style={{
+                          position: "relative",
+                          display: "block",
+                          width: "30px",
+                          height: "28px",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {globalState.dataCarts.length > 0 ? (
+                          <>
+                            <span
+                              style={{
+                                position: "absolute",
+                                top: "0",
+                                right: "0",
+                                zIndex: "2",
+                                borderRadius: "5px",
+                                backgroundColor: "red",
+                                width: "18px",
+                                height: "18px",
+                                lineHeight: "16px",
+                                display: "block",
+                                textAlign: "center",
+                                fontFamily: "sans-serif",
+                                fontWeight: "500",
+                                fontSize: "10px",
+                                color: "white",
+                              }}
+                            >
+                              {globalState.dataCarts.length}
+                            </span>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+
+                        <img
+                          src={require("../Image/icons/icons8-cart-48-white.png")}
+                          alt=""
+                          style={{
+                            width: "25px",
+                            height: "25px",
+                            position: "relative",
+                            top: "1px",
+                          }}
+                        />
+                      </div>
+                    </Link>
                   </li>
                   <li className="nav-item dropdown">
                     <a

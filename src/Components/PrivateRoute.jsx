@@ -1,13 +1,13 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import { Outlet, Navigate } from "react-router-dom";
+import { GlobalContext } from "../Contexts/GlobateContext";
 
 export default function PrivateRoute() {
-  const auth = {
-    token: false,
-  };
+  const [globalState] = useContext(GlobalContext);
+
   return (
     <div className="container">
-      {auth.token ? <Outlet /> : <h1>Anda Harus Login</h1>}
+      {globalState.isLogin ? <Outlet /> : <Navigate to="/login" />}
     </div>
   );
 }
