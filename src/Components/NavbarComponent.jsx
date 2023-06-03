@@ -114,7 +114,7 @@ export default function NavbarComponent() {
                                 backgroundColor: "red",
                                 width: "18px",
                                 height: "18px",
-                                lineHeight: "16px",
+                                lineHeight: "18px",
                                 display: "block",
                                 textAlign: "center",
                                 fontFamily: "sans-serif",

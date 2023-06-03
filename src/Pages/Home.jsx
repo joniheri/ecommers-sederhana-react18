@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { GlobalContext } from "../Contexts/GlobateContext";
 import { formatRupiah } from "../Configs/Config";
 import { dataProduct } from "./Product/DataProduct";
@@ -15,17 +16,28 @@ export default function Home() {
   const [searchInput, setSearchInput] = useState("");
   const [searchResultsDataProduct, setSearchResultsDataProduct] =
     useState(dataProduct);
+  const [dataProductApiDummy, setDataProductApiDummy] = useState([]);
+
+  useEffect(() => {
+    getDataProductApi();
+  }, []);
 
   const handleGantiNamaSaya = () => {
-    if (namaSaya == "Nama Saya") {
+    if (namaSaya === "Nama Saya") {
       setNamaSaya("Jon Heri");
-    } else if (namaSaya == "Jon Heri") {
+    } else if (namaSaya === "Jon Heri") {
       setNamaSaya("Wildan");
-    } else if (namaSaya == "Wildan") {
+    } else if (namaSaya === "Wildan") {
       setNamaSaya("Nama Saya");
     } else {
       setNamaSaya("Nama Saya");
     }
+  };
+
+  const getDataProductApi = async () => {
+    const response = await axios.get("http://localhost:3001/api/dataproduct");
+    console.log("Data Product in Home.jsx: ", response);
+    setDataProductApiDummy(response.data.data);
   };
 
   const handleOrder = (id) => {
@@ -52,7 +64,7 @@ export default function Home() {
     );
     setSearchResultsDataProduct(results);
   };
-  console.log(searchResultsDataProduct);
+  // console.log(searchResultsDataProduct);
   // Search Data Product
 
   return (
@@ -250,7 +262,32 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <pre>{JSON.stringify(globalState.dataCarts, null, 2)}</pre>
+      <div className="mb-5">
+        <h2>Data Product Api Dummy</h2>
+        <table className="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>ID</th>
+              <th>Product Name</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataProductApiDummy.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.id}</td>
+                  <td>{item.product}</td>
+                  <td>{formatRupiah(item.price)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {/* <pre>{JSON.stringify(globalState.dataCarts, null, 2)}</pre> */}
       {/* End Data Product */}
     </div>
   );
