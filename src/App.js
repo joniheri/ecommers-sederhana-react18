@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {
-  GlobalContext,
-  GlobalContextProvider,
-} from "./Contexts/GlobateContext";
+import { useContext, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+
+import { GlobalContext } from "./Contexts/GlobalContext";
+import { setToken, ApiVersi1 } from "./Configs/ApiConfig";
 
 import NavbarComponent from "./Components/NavbarComponent";
 import About from "./Pages/About";
@@ -17,31 +17,59 @@ import Login from "./Pages/Login";
 import Carts from "./Components/Carts";
 import Register from "./Pages/Register";
 
+if (localStorage.token) {
+  setToken(localStorage.token);
+}
+
 function App() {
+  const [globalState, globalDispatch] = useContext(GlobalContext);
+
   const namaSaya = "Jon Heri";
   const dataBuah = ["mangga", "jeruk", "apple"];
+
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  const checkToken = async () => {
+    // console.log("Token: ", localStorage.token);
+    try {
+      if (localStorage.token) {
+        const response = await ApiVersi1.get("/check-token");
+        // console.log("CheckToken in App.js: ", response);
+
+        globalDispatch({
+          type: "PROCESS_LOGIN",
+          data: response.data.user,
+        });
+      } else {
+        localStorage.clear();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <BrowserRouter>
-        <GlobalContextProvider>
-          <NavbarComponent />
+        <NavbarComponent />
 
-          {/* Content */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/about"
-              element={<About nilaiNama={namaSaya} dataBuah={dataBuah} />}
-            />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route element={<PrivateRoute />}>
-              <Route path="/product" element={<Product />} />
-              <Route path="/carts" element={<Carts />} />
-            </Route>
-          </Routes>
-          {/* End Content */}
-        </GlobalContextProvider>
+        {/* Content */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/about"
+            element={<About nilaiNama={namaSaya} dataBuah={dataBuah} />}
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/product" element={<Product />} />
+            <Route path="/carts" element={<Carts />} />
+          </Route>
+        </Routes>
+        {/* End Content */}
       </BrowserRouter>
     </>
   );

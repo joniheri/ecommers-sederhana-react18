@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { GlobalContext } from "../Contexts/GlobateContext";
+import { GlobalContext } from "../Contexts/GlobalContext";
 
 export default function About(props) {
   const [globalState, globalDispatch] = useContext(GlobalContext);

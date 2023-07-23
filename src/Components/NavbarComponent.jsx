@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { GlobalContext } from "../Contexts/GlobateContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { GlobalContext } from "../Contexts/GlobalContext";
 
 export default function NavbarComponent() {
   const [globalState, globalDispatch] = useContext(GlobalContext);
   const location = useLocation();
+  const navigate = useNavigate();
   // console.log("Global state di Navbarjsx: ", globalState);
 
   return (
@@ -151,7 +152,7 @@ export default function NavbarComponent() {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Hello, Jon Heri
+                      Hello, {globalState.dataUserLogin.fullname}
                     </a>
                     <ul className="dropdown-menu dropdown-menu-end">
                       <li>
@@ -170,9 +171,11 @@ export default function NavbarComponent() {
                       <li>
                         <a
                           onClick={() => {
+                            localStorage.clear();
                             globalDispatch({
                               type: "PROCESS_LOGOUT",
                             });
+                            navigate("/login");
                           }}
                           className="dropdown-item"
                           href="#"

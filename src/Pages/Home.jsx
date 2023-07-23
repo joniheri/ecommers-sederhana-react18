@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { GlobalContext } from "../Contexts/GlobateContext";
+import { GlobalContext } from "../Contexts/GlobalContext";
 import { formatRupiah } from "../Configs/Config";
 import { dataProduct } from "./Product/DataProduct";
 
@@ -36,7 +36,7 @@ export default function Home() {
 
   const getDataProductApi = async () => {
     const response = await axios.get("http://localhost:3001/api/dataproduct");
-    console.log("Data Product in Home.jsx: ", response);
+    // console.log("Data Product in Home.jsx: ", response);
     setDataProductApiDummy(response.data.data);
   };
 

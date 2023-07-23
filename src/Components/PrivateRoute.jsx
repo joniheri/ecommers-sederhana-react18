@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import { GlobalContext } from "../Contexts/GlobateContext";
+import { GlobalContext } from "../Contexts/GlobalContext";
 
 export default function PrivateRoute() {
   const [globalState] = useContext(GlobalContext);

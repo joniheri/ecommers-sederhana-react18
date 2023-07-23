@@ -12,12 +12,9 @@ export const GlobalContextProvider = (props) => {
 };
 
 const initialState = {
-  dataUser: {
-    fullname: "Jon Heri",
-    gender: "Laki-laki",
-  },
   dataCarts: [],
   isLogin: false,
+  dataUserLogin: [],
 };
 
 const reducer = (state, action) => {
@@ -25,6 +22,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       isLogin: true,
+      dataUserLogin: action.data,
     };
   } else if (action.type === "PROCESS_LOGOUT") {
     return {

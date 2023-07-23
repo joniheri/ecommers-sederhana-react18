@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { formatRupiah } from "../Configs/Config";
-import { GlobalContext } from "../Contexts/GlobateContext";
+import { GlobalContext } from "../Contexts/GlobalContext";
 
 export default function Carts() {
   const [globalState, globalDispatch] = useContext(GlobalContext);
