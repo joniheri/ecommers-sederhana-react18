@@ -16,6 +16,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import Login from "./Pages/Login";
 import Carts from "./Components/Carts";
 import Register from "./Pages/Register";
+import AddProduct from "./Pages/Product/AddProduct";
 
 if (localStorage.token) {
   setToken(localStorage.token);
@@ -68,6 +69,7 @@ function App() {
             <Route path="/product" element={<Product />} />
             <Route path="/carts" element={<Carts />} />
           </Route>
+          <Route path="/addproduct" element={<AddProduct />} />
         </Routes>
         {/* End Content */}
       </BrowserRouter>

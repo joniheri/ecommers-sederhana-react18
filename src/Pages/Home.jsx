@@ -224,6 +224,34 @@ export default function Home() {
             </div>
           </div>
           <div className="row row-cols-1 row-cols-md-4 g-4">
+            <div
+              className="col"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                navigate("/addproduct");
+              }}
+            >
+              <div className="card h-100 shadow">
+                <div
+                  className="card-body"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={require("../Image/icons/icons8-plus-90-black.png")}
+                    alt=""
+                    style={{
+                      height: "130px",
+                      width: "auto",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
             {searchResultsDataProduct.map((item, index) => {
               return (
                 <div key={index} className="col">
